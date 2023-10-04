@@ -17,4 +17,11 @@ class MonedasProvider {
       return [];
     }
   }
+
+  Future<double> getValorMonedas(String codigoMoneda) async {
+    var url = Uri.parse(apiUrl + '/' + codigoMoneda);
+    var respuesta = await http.get(url);
+    var moneda = json.decode(respuesta.body);
+    return double.parse(moneda['Valor'].replaceAll(',', '.'));
+  }
 }
